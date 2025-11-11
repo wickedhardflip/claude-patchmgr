@@ -281,17 +281,26 @@ If queries return no data:
 2. Check table has data: `SELECT COUNT(*) FROM tablename;`
 3. Review WHERE clause conditions
 
-## Slash Command
+## Claude Code Slash Command
 
-Use `/patchmgr` in Claude Code to get context-specific help for patch reporting tasks.
+### `/patchmgr` - Load Full Project Context
+
+Type `/patchmgr` in Claude Code to automatically load:
+- Project working directory (`claude-patchmgr`)
+- Database connection details (PMP + private DB)
+- Available scripts and their usage
+- Current statistics and data structure
+- Common queries and example SQL
+- Quick reference for all functionality
+
+**Recommended**: Use `/patchmgr` whenever working with this project to ensure proper context.
+
+**Command Location**: `C:\Users\admbwagner\Documents\claude\.claude\commands\patchmgr.md`
 
 ## Project Structure
 
 ```
 claude-patchmgr/
-├── .claude/
-│   └── commands/
-│       └── patchmgr.md          # Slash command definition
 ├── scripts/
 │   ├── quick_test.py            # Connection test
 │   ├── patch_report.py          # Main reporting script
