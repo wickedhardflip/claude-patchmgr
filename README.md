@@ -8,6 +8,13 @@ This project provides direct database access to ManageEngine Patch Manager Plus 
 
 ## Features
 
+### Data Sync to Private Database ⭐ NEW!
+- **Sync to PostgreSQL**: Extract all patch compliance data to your private `claude_bwagner` database
+- **Comprehensive Audit Data**: System info, patch counts, severity levels, compliance percentages
+- **Automated Queries**: Pre-built views and query examples
+- **See**: [SYNC_GUIDE.md](SYNC_GUIDE.md) for complete documentation
+
+### Direct PMP Reporting
 - **System Inventory**: List all managed computers with status and last contact
 - **Patch Compliance**: Missing/installed patch counts per system
 - **Patch Status**: Overall patch status breakdown across environment
@@ -63,6 +70,48 @@ PATCHMGR_DATABASE=desktopcentral
 | `collectiontopatch` | 2,741 | Collection-patch mappings |
 
 ## Usage
+
+### Sync Patch Compliance Data ⭐ RECOMMENDED
+
+Extract all patch compliance data to your private database:
+
+```bash
+python scripts/sync_patch_compliance.py
+```
+
+This creates a `patch_compliance` table in your `claude_bwagner` database with:
+- All 83 managed systems
+- Patch counts by type (MS, third-party, drivers, BIOS)
+- Severity breakdown (Critical, Important, Moderate, Low, Unrated)
+- Compliance percentages
+- Last contact and patch dates
+- Auto-calculated totals and indexes
+
+**Query the synced data:**
+
+```bash
+python scripts/query_compliance.py
+```
+
+**Or use PostgreSQL directly:**
+
+```sql
+-- Connect
+psql -h 10.100.4.22 -U bwagner -d claude_bwagner
+
+-- View summary
+SELECT * FROM patch_compliance_summary;
+
+-- Systems with critical patches
+SELECT system_name, missing_critical, missing_patches_total
+FROM patch_compliance
+WHERE missing_critical > 0
+ORDER BY missing_critical DESC;
+```
+
+**See [SYNC_GUIDE.md](SYNC_GUIDE.md) for complete documentation.**
+
+---
 
 ### Quick Connection Test
 
