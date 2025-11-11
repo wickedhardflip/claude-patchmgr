@@ -1,0 +1,40 @@
+# Credentials and sensitive data
+.env
+*.env
+credentials.env
+config.ini
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Reports and output files
+reports/*.csv
+reports/*.xlsx
+reports/*.json
+*.log
+
+# Keep example files
+!.env.example
+!reports/.gitkeep
